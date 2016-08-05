@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">PhoneCaseDesign</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_initialization">InitializationActivity</string>
+    <string name="next_button">Next</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_adjustment_screen">AdjustmentScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+
+    <string name="title_activity_export">ExportActivity</string>
+    <string name="title_activity_adjustment">Shop Ốp Lếp</string>
+    <string name="title_activity_home">Shop Ốp Lếp</string>
+
+    <string name="advertisement1">Review ốp lưng</string>
+    <string name="advertisement2">Album ảnh</string>
+    <string name="advertisement3">Thông tin/ Sự kiện</string>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="phonecase.shopoplep.phonecasedesign.HomeActivity"
+    tools:showIn="@layout/activity_home"
+    android:background="@color/black"
+    >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:background="@color/black"
+            >
+            <Button
+                android:id="@+id/btnAds1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/advertisment1"
+                android:layout_marginBottom="10dp"
+                android:text="@string/advertisement1"
+                android:textColor="@color/white_overlay"
+                android:textAllCaps="true"
+                android:textSize="12pt"
+                />
+
+            <Button
+                android:id="@+id/btnAds2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/advertisment2"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/advertisement2"
+                android:textColor="@color/white_overlay"
+                android:textAllCaps="true"
+                android:textSize="12pt"
+                />
+
+            <Button
+                android:id="@+id/btnAds3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/advertisment3"
+                android:layout_marginTop="10dp"
+                android:text="@string/advertisement3"
+                android:textColor="@color/white_overlay"
+                android:textAllCaps="true"
+                android:textSize="12pt"
+                />
+
+        </LinearLayout>
+</RelativeLayout>
