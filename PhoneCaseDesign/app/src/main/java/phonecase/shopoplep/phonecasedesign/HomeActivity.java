@@ -27,7 +27,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
                 Intent i = new Intent();
-                i.setClass(HomeActivity.this, AdjustmentActivity_Final.class);
+                i.setClass(HomeActivity.this, PhonePickerActivity.class);
                 startActivity(i);
             }
         });

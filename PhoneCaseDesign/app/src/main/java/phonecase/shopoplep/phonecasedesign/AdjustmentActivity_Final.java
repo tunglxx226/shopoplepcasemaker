@@ -1,9 +1,13 @@
 package phonecase.shopoplep.phonecasedesign;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,13 +19,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import static android.view.MotionEvent.*;
+import static android.view.MotionEvent.ACTION_DOWN;
+import static android.view.MotionEvent.ACTION_MASK;
+import static android.view.MotionEvent.ACTION_MOVE;
+import static android.view.MotionEvent.ACTION_POINTER_DOWN;
+import static android.view.MotionEvent.ACTION_POINTER_UP;
+import static android.view.MotionEvent.ACTION_UP;
 
-public class AdjustmentActivity_Final extends AppCompatActivity implements View.OnTouchListener{
+public class AdjustmentActivity_Final extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener{
 
     private ImageView img, overlayImage;
-    RelativeLayout
+    RelativeLayout overlayLayer;
     private android.widget.RelativeLayout.LayoutParams layoutParams;
 
     // For moving:
@@ -32,6 +42,8 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
     private float scale = 1f;
     private ScaleGestureDetector SGD;
     private Matrix matrix = new Matrix();
+
+    FloatingActionButton fab;
 
     @Override
     public void onBackPressed() {
@@ -69,7 +81,22 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
         img = (ImageView) findViewById(R.id.imgToPrint);
         overlayImage = (ImageView) findViewById(R.id.overlayImage);
         img.setOnTouchListener(this);
-        loadImg("uri", "pt000000");
+        loadImg(uri, phoneType);
+
+        overlayLayer = (RelativeLayout) findViewById(R.id.overlayLayer);
+        TextView watermark = new TextView(AdjustmentActivity_Final.this);
+        watermark.setText("Shop Ốp Lếp");
+        watermark.setAlpha(Float.valueOf("0.5"));
+        watermark.setTextColor(getResources().getColor(R.color.white_overlay));
+        watermark.setTextSize(40);
+        overlayLayer.addView(watermark);
+        RelativeLayout.LayoutParams layoutParams =
+                (RelativeLayout.LayoutParams)watermark.getLayoutParams();
+        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        watermark.setLayoutParams(layoutParams);
+
+        fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
         SGD = new ScaleGestureDetector(this,new ScaleListener());
     }
@@ -77,6 +104,10 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
     private void loadImg(String uri, String phoneType){
         overlayImage.setImageDrawable(getResources().getDrawable(getResources().getIdentifier(phoneType, "drawable", getPackageName())));
     }
+
+    /**
+     * Moving imageview around sample code:
+     */
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {
@@ -108,6 +139,50 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
         return true;
     }
 
+    /**
+     * End of Moving imageview around sample code:
+     */
+
+
+    /**
+     * Get image from gallary sample code:
+     */
+    private static final int SELECT_PICTURE = 1;
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.fab){
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent,"Select Picture"), SELECT_PICTURE);
+
+        }
+
+    }
+
+    Bitmap bitmap=null;
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_PICTURE) {
+                Uri selectedImageUri = data.getData();
+                img.setImageURI(selectedImageUri);
+            }
+        }
+    }
+
+    public String getPath(Uri uri)
+    {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        if (cursor == null) return null;
+        int column_index =             cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String s=cursor.getString(column_index);
+        cursor.close();
+        return s;
+    }
+
     private class ScaleListener extends ScaleGestureDetector.
 
             SimpleOnScaleGestureListener {
@@ -121,4 +196,8 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
             return true;
         }
     }
+    /**
+     * end of get image from gallery sample code
+     */
+
 }
