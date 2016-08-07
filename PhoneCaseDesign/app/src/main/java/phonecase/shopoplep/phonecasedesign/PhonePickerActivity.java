@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,15 @@ public class PhonePickerActivity extends AppCompatActivity implements AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_picker);
-        DBHelper mDB = new DBHelper(PhonePickerActivity.this);
+        DBHelper mDB = null;
+        try {
+            mDB = new DBHelper(PhonePickerActivity.this);
+            mDB.createDataBase();
+            mDB.openDataBase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         phoneType = new ArrayList<String>();
         phoneType.addAll(mDB.getAllPhoneType());
