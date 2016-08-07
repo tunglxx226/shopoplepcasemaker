@@ -30,7 +30,11 @@
             android:name=".AdjustmentActivity_Final"
             android:label="@string/title_activity_adjustment"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PhonePickerActivity" />
+
+        <activity android:name=".PhonePickerActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

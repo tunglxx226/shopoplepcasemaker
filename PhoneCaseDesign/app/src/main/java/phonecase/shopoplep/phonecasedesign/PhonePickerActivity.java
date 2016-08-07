@@ -2,6 +2,7 @@ package phonecase.shopoplep.phonecasedesign;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +24,7 @@ public class PhonePickerActivity extends AppCompatActivity implements AdapterVie
 
 
     private Spinner mSpinner;
-    private Button okBtn;
+    private FloatingActionButton fab;
     List<String> phoneType = new ArrayList<String>();
     List<String> phoneTypeId = new ArrayList<String>();
     String chosenPhoneTypeId = "";
@@ -54,8 +55,8 @@ public class PhonePickerActivity extends AppCompatActivity implements AdapterVie
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(dataAdapter);
 
-        okBtn = (Button) findViewById(R.id.okBtn);
-        okBtn.setOnClickListener(this);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
     }
 
@@ -71,7 +72,7 @@ public class PhonePickerActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.okBtn){
+        if(view.getId() == R.id.fab){
             Intent intent = new Intent();
             intent.setClass(PhonePickerActivity.this, AdjustmentActivity_Final.class);
             intent.putExtra("phoneType", chosenPhoneTypeId);
