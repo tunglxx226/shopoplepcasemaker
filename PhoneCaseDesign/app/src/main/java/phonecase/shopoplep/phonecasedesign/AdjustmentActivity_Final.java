@@ -49,7 +49,7 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
     public void onBackPressed() {
         Log.d("CDA", "onBackPressed Called");
         Intent i = new Intent();
-        i.setClass(AdjustmentActivity_Final.this, HomeActivity.class);
+        i.setClass(AdjustmentActivity_Final.this, PhonePickerActivity.class);
         startActivity(i);
         this.finish();
     }

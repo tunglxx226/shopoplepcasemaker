@@ -29,6 +29,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Intent i = new Intent();
                 i.setClass(HomeActivity.this, PhonePickerActivity.class);
                 startActivity(i);
+                HomeActivity.this.finish();
             }
         });
 

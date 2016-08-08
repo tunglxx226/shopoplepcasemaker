@@ -5,6 +5,7 @@ import android.database.DataSetObserver;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,6 +29,15 @@ public class PhonePickerActivity extends AppCompatActivity implements AdapterVie
     List<String> phoneType = new ArrayList<String>();
     List<String> phoneTypeId = new ArrayList<String>();
     String chosenPhoneTypeId = "";
+
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        Intent i = new Intent();
+        i.setClass(PhonePickerActivity.this, HomeActivity.class);
+        startActivity(i);
+        this.finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
