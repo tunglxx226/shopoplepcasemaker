@@ -21,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_MASK;
 import static android.view.MotionEvent.ACTION_MOVE;
@@ -166,9 +168,28 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
-                img.setImageURI(selectedImageUri);
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),selectedImageUri);
+                    Bitmap scaledBitmap = scaleDown(bitmap, Constants.MAX_IMAGE_SIZE, true);
+                    img.setImageBitmap(scaledBitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
+    }
+
+    public static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
+                                   boolean filter) {
+        float ratio = Math.min(
+                (float) maxImageSize / realImage.getWidth(),
+                (float) maxImageSize / realImage.getHeight());
+        int width = Math.round((float) ratio * realImage.getWidth());
+        int height = Math.round((float) ratio * realImage.getHeight());
+
+        Bitmap newBitmap = Bitmap.createScaledBitmap(realImage, width,
+                height, filter);
+        return newBitmap;
     }
 
     public String getPath(Uri uri)
@@ -176,7 +197,7 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
         String[] projection = { MediaStore.Images.Media.DATA };
         Cursor cursor = managedQuery(uri, projection, null, null, null);
         if (cursor == null) return null;
-        int column_index =             cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         String s=cursor.getString(column_index);
         cursor.close();
