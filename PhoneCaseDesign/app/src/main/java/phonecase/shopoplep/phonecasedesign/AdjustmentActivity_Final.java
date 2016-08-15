@@ -59,7 +59,6 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         String uri = this.getIntent().getStringExtra("uri");
         if(uri == null || "".equals(uri))
             uri = "uri";
@@ -87,7 +86,7 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
 
         overlayLayer = (RelativeLayout) findViewById(R.id.overlayLayer);
         TextView watermark = new TextView(AdjustmentActivity_Final.this);
-        watermark.setText("Shop Ốp Lếp");
+        watermark.setText(getResources().getString(R.string.app_name));
         watermark.setAlpha(Float.valueOf("0.5"));
         watermark.setTextColor(getResources().getColor(R.color.white_overlay));
         watermark.setTextSize(40);
@@ -145,7 +144,6 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
      * End of Moving imageview around sample code:
      */
 
-
     /**
      * Get image from gallary sample code:
      */
@@ -157,9 +155,7 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent,"Select Picture"), SELECT_PICTURE);
-
         }
-
     }
 
     Bitmap bitmap=null;
@@ -220,5 +216,4 @@ public class AdjustmentActivity_Final extends AppCompatActivity implements View.
     /**
      * end of get image from gallery sample code
      */
-
 }
